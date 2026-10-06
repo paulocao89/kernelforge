@@ -36,7 +36,7 @@ static double gbps(int n, double seconds)
 int main(void)
 {
     int sizes[] = { 512, 1024, 2048, 4096 };
-    int tiles[] = { 16, 32, 64 };
+    int tiles[] = { 8, 16, 32, 64, 128 };
     const float alpha = 1.5f;
 
     FILE *csv = fopen("results/transpose.csv", "w");
