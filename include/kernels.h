@@ -21,6 +21,9 @@ void transpose_scale_v0(const float *A, float *B,
  * from A and the writes to B stay in L1/L2 cache. */
 void transpose_scale_v1(const float *A, float *B,
                         int rows, int cols, float alpha, int tile);
+                        
+void transpose_scale_paulo(const float *A, float *B,
+                           int rows, int cols, float alpha);
 
 #ifdef __cplusplus
 }

@@ -59,6 +59,12 @@ int main(void)
                n, "v0 naive", "-", t_v0 * 1e3, gbps(n, t_v0), 1.0);
         if (csv) fprintf(csv, "%d,v0,0,%.6f,%.3f\n", n, t_v0, gbps(n, t_v0));
 
+        double t_p;
+        BEST_TIME(t_p, transpose_scale_paulo(A, B, n, n, alpha));
+        printf("%-6d %-10s %-6s %-12.3f %-8.2f %.2fx\n",
+               n, "paulo", "-", t_p * 1e3, gbps(n, t_p), t_v0 / t_p);
+        if (csv) fprintf(csv, "%d,paulo,0,%.6f,%.3f\n", n, t_p, gbps(n, t_p));
+
         for (size_t t = 0; t < sizeof tiles / sizeof tiles[0]; t++) {
             double t_v1;
             BEST_TIME(t_v1, transpose_scale_v1(A, B, n, n, alpha, tiles[t]));

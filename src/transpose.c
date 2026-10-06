@@ -32,3 +32,15 @@ void transpose_scale_v1(const float *A, float *B,
         }
     }
 }
+
+void transpose_scale_paulo(const float *A, float *B,
+                            int rows, int cols, float alpha)
+{
+    for (int j = 0; j < cols; j++) {
+        for (int i = 0; i < rows; i++) {
+           /* Writes to B are now contiguous (i moves by 1).
+            * Reads from A now jump a full row each time. */
+            B[(long)j * rows + i] = alpha * A[(long)i * cols + j];
+        }
+    }
+}
