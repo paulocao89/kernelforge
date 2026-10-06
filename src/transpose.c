@@ -44,3 +44,21 @@ void transpose_scale_paulo(const float *A, float *B,
         }
     }
 }
+
+void transpose_scale_v1b(const float *A, float *B,
+                         int rows, int cols, float alpha, int tile)
+{
+    for (int i0 = 0; i0 < rows; i0 += tile) {
+        int i_end = min_int(i0 + tile, rows);
+        for (int j0 = 0; j0 < cols; j0 += tile) {
+            int j_end = min_int(j0 + tile, cols);
+            /* Same tiles as v1, but inside each tile we
+             * write B contiguously (i is the inner loop). */
+            for (int j = j0; j < j_end; j++) {
+                for (int i = i0; i < i_end; i++) {
+                    B[(long)j * rows + i] = alpha * A[(long)i * cols + j];
+                }
+            }
+        }
+    }
+}

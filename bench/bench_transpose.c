@@ -73,6 +73,14 @@ int main(void)
                    t_v0 / t_v1);
             if (csv) fprintf(csv, "%d,v1,%d,%.6f,%.3f\n",
                              n, tiles[t], t_v1, gbps(n, t_v1));
+
+            double t_v1b;
+            BEST_TIME(t_v1b, transpose_scale_v1b(A, B, n, n, alpha, tiles[t]));
+            printf("%-6d %-10s %-6d %-12.3f %-8.2f %.2fx\n",
+                   n, "v1b tiled", tiles[t], t_v1b * 1e3, gbps(n, t_v1b),
+                   t_v0 / t_v1b);
+            if (csv) fprintf(csv, "%d,v1b,%d,%.6f,%.3f\n",
+                             n, tiles[t], t_v1b, gbps(n, t_v1b));
         }
         printf("\n");
 

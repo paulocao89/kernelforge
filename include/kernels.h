@@ -25,6 +25,10 @@ void transpose_scale_v1(const float *A, float *B,
 void transpose_scale_paulo(const float *A, float *B,
                            int rows, int cols, float alpha);
 
+/* v1b: cache-tiled, but writes B contiguously inside each tile. */
+void transpose_scale_v1b(const float *A, float *B,
+                         int rows, int cols, float alpha, int tile);
+
 #ifdef __cplusplus
 }
 #endif
